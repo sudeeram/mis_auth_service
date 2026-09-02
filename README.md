@@ -1,5 +1,11 @@
 # Auth Service
 
+## Contribution workflow
+
+Run `./scripts/setup-git-hooks.sh` once after cloning. All work must use a
+`feature/*`, `hotfix/*`, or `bugfix/*` branch and reach `main` through a pull
+request.
+
 Django authentication authority for local accounts and Microsoft Entra SAML 2.0 SSO. It owns users, sessions, roles, permissions, SAML identities, and application JWT signing.
 
 ## Required runtime configuration
