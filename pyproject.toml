@@ -1,0 +1,18 @@
+[project]
+name = "auth-service"
+version = "0.1.0"
+description = "Authentication authority for local accounts and Microsoft Entra SAML 2.0 SSO."
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "argon2-cffi>=25,<26",
+    "django>=5.2,<5.3",
+    "djangorestframework>=3.16,<3.17",
+    "djangosaml2>=1.12,<1.13",
+    "gunicorn>=23,<24",
+    "psycopg[binary]>=3.2,<3.3",
+    "pyjwt[crypto]>=2.10,<3",
+    "whitenoise>=6.9,<7",
+]
+
+[tool.uv]
+package = false

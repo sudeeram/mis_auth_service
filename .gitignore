@@ -1,0 +1,44 @@
+# Python virtual environments and bytecode
+.venv/
+__pycache__/
+*.py[cod]
+
+# Test, coverage, type-checking, and lint caches
+.pytest_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+
+# Local environment configuration; keep a safe example if one is added
+.env*
+!.env.example
+
+# Django runtime and development data
+staticfiles/
+media/
+dev-certs/
+*.sqlite3
+
+# Python build and packaging output
+build/
+dist/
+*.egg-info/
+
+# Logs
+*.log
+
+# Environment-specific authentication keys and metadata
+*.pem
+*.key
+*.crt
+entra-idp-metadata.xml
+
+# Operating-system and editor metadata
+.DS_Store
+.idea/
+.vscode/
