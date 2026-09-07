@@ -2,7 +2,6 @@ import uuid
 
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.db.models.functions import Lower
 
 
 class AccountType(models.TextChoices):
@@ -28,13 +27,13 @@ class User(AbstractUser):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                Lower("email"),
-                condition=models.Q(account_type=AccountType.LOCAL),
-                name="unique_local_email_case_insensitive",
+                fields=("account_type", "email"),
+                name="unique_account_type_email",
             ),
         ]
 
     def save(self, *args, **kwargs):
+        self.email = self.email.strip().lower()
         if self.account_type == AccountType.ENTRA:
             self.set_unusable_password()
         self.is_active = self.status == AccountStatus.ACTIVE
@@ -111,4 +110,3 @@ class SecurityAuditEvent(models.Model):
     ip_address = models.GenericIPAddressField(null=True, blank=True)
     details = models.JSONField(default=dict, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-

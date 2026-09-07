@@ -54,7 +54,7 @@ dependencies = [
     { name = "djangorestframework" },
     { name = "djangosaml2" },
     { name = "gunicorn" },
-    { name = "psycopg", extra = ["binary"] },
+    { name = "mysqlclient" },
     { name = "pyjwt", extra = ["crypto"] },
     { name = "whitenoise" },
 ]
@@ -66,7 +66,7 @@ requires-dist = [
     { name = "djangorestframework", specifier = ">=3.16,<3.17" },
     { name = "djangosaml2", specifier = ">=1.12,<1.13" },
     { name = "gunicorn", specifier = ">=23,<24" },
-    { name = "psycopg", extras = ["binary"], specifier = ">=3.2,<3.3" },
+    { name = "mysqlclient", specifier = ">=2.2,<3" },
     { name = "pyjwt", extras = ["crypto"], specifier = ">=2.10,<3" },
     { name = "whitenoise", specifier = ">=6.9,<7" },
 ]
@@ -253,46 +253,21 @@ wheels = [
 ]
 
 [[package]]
+name = "mysqlclient"
+version = "2.2.8"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/eb/b0/9df076488cb2e536d40ce6dbd4273c1f20a386e31ffe6e7cb613902b3c2a/mysqlclient-2.2.8.tar.gz", hash = "sha256:8ed20c5615a915da451bb308c7d0306648a4fd9a2809ba95c992690006306199", size = 92287, upload-time = "2026-02-10T10:58:37.405Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/db/1f/7d6b3fbfc8a317805fdb8bbfbc23af99f2090497090e82513daf491a29ce/mysqlclient-2.2.8-cp312-cp312-win_amd64.whl", hash = "sha256:000c7ec3d11e7c411db832e4cfcd7f05db47464326381f5d5ae991b4bb572f93", size = 207171, upload-time = "2026-02-10T10:58:39.827Z" },
+]
+
+[[package]]
 name = "packaging"
 version = "26.3"
 source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/7d/fa/3944b40b07da9ce895c0e6303a5ab7d53da063554f534556b134a54d6093/packaging-26.3.tar.gz", hash = "sha256:94edc256424af38762eb31306eed28beb9f0efc50a8837492c9d6fd6004aed79", size = 313412, upload-time = "2026-08-04T18:15:28.737Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/63/34/ba1c580383c9eada3711951fef0795c80b829a078d72188184bcab9dd527/packaging-26.3-py3-none-any.whl", hash = "sha256:d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c", size = 129956, upload-time = "2026-08-04T18:15:27.159Z" },
-]
-
-[[package]]
-name = "psycopg"
-version = "3.2.13"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "typing-extensions" },
-    { name = "tzdata", marker = "sys_platform == 'win32'" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/44/05/d4a05988f15fcf90e0088c735b1f2fc04a30b7fc65461d6ec278f5f2f17a/psycopg-3.2.13.tar.gz", hash = "sha256:309adaeda61d44556046ec9a83a93f42bbe5310120b1995f3af49ab6d9f13c1d", size = 160626, upload-time = "2025-11-21T22:34:32.328Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/a9/14/f2724bd1986158a348316e86fdd0837a838b14a711df3f00e47fba597447/psycopg-3.2.13-py3-none-any.whl", hash = "sha256:a481374514f2da627157f767a9336705ebefe93ea7a0522a6cbacba165da179a", size = 206797, upload-time = "2025-11-21T22:29:39.733Z" },
-]
-
-[package.optional-dependencies]
-binary = [
-    { name = "psycopg-binary", marker = "implementation_name != 'pypy'" },
-]
-
-[[package]]
-name = "psycopg-binary"
-version = "3.2.13"
-source = { registry = "https://pypi.org/simple" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/49/9e/f90243b3d0d007a89989b013b0eb3e78ac929fed4eb40a2b317452abafe1/psycopg_binary-3.2.13-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:223fc610a80bbc4355ad3c9952d468a18bb5cd7065846a8c275f100d80cd4004", size = 3996285, upload-time = "2025-11-21T22:31:08.95Z" },
-    { url = "https://files.pythonhosted.org/packages/12/42/7d55f515ee3e2ced5ff9bc493fb2308f5187686b6d9583cd6a9c880d2053/psycopg_binary-3.2.13-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:b67f06a68d68b4621b6a411f9e583df876977afa06b1ba270b1b347d40aa93fc", size = 4070567, upload-time = "2025-11-21T22:31:12.31Z" },
-    { url = "https://files.pythonhosted.org/packages/a8/a8/ead4de04d8cf5f35119a75a8dd92fa4a2ec8a309b1aa58855f64616c03d7/psycopg_binary-3.2.13-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:082579f2ae41bdabe20c82810810f3e290ac2206cccf0cb41cf36b3218f53b3c", size = 4616833, upload-time = "2025-11-21T22:31:16.614Z" },
-    { url = "https://files.pythonhosted.org/packages/26/2e/4af6ab69ade7d67d31296f88c79c322a3522564e30b3f1458f19e74d67c3/psycopg_binary-3.2.13-cp312-cp312-manylinux2014_ppc64le.manylinux_2_17_ppc64le.whl", hash = "sha256:ff7df7bd8ec2c805f3a4896b8ade971139af0f9f8cf45d05014ac71fe54887be", size = 4711710, upload-time = "2025-11-21T22:31:22.007Z" },
-    { url = "https://files.pythonhosted.org/packages/9a/31/bdbd6b2264bb7ae5fe8b775c5524da73329d8888c6137fd8b050ff9cabbc/psycopg_binary-3.2.13-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:8f1189dc78553ef4b2e55d9e116fc74870191bc6a9a5f4442412a703c4cc6c3b", size = 4401656, upload-time = "2025-11-21T22:31:26.842Z" },
-    { url = "https://files.pythonhosted.org/packages/33/c5/8fd8f96450e4ef242022c9a588305e3dc7309c34bc392a9b4c2da60854b1/psycopg_binary-3.2.13-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:0ef8ed4a4e0f7bf5e941782478a43c14b2b585b031e2266dd3afb87be2775d95", size = 3851747, upload-time = "2025-11-21T22:31:30.5Z" },
-    { url = "https://files.pythonhosted.org/packages/4a/47/406d102ae49d253f124644530f1e5b3fd2f92aea59d4f9b8dd1c71cf8e0f/psycopg_binary-3.2.13-cp312-cp312-musllinux_1_2_ppc64le.whl", hash = "sha256:de06fc9707a49f7c081b5c950974dd6de3dc33d681f7524f0b396471f5a4a480", size = 3524796, upload-time = "2025-11-21T22:31:34.377Z" },
-    { url = "https://files.pythonhosted.org/packages/45/6f/a89be8aee27a5522e97dbcb225fe429c489acdf0bb25fc0fadb329dfb39f/psycopg_binary-3.2.13-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:917ad1cd6e6ef8a9df2f28d7b29c7148f089be46ac56fe838f986c0227652d14", size = 3576536, upload-time = "2025-11-21T22:31:38.06Z" },
-    { url = "https://files.pythonhosted.org/packages/ef/f8/c924c7dc792c81bf6181d7d4eeb613c8b2151b3a208f95cedec3c1a25ba3/psycopg_binary-3.2.13-cp312-cp312-win_amd64.whl", hash = "sha256:b53b0d9499805b307017070492189e349256e0946f62c815e442baa01f2ea6c5", size = 2902172, upload-time = "2025-11-21T22:31:41.256Z" },
 ]
 
 [[package]]
@@ -390,15 +365,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/5f/d3/3f06a1006f2261d1342aefb3c71eed02f5d4ca5bdbecd86ebc12ad38306e/sqlparse-0.6.0.tar.gz", hash = "sha256:113c35c75365ab9cc9c7231d68c6428fb11c085fc8e9eb1ad659b7ddbf6cd2b9", size = 178477, upload-time = "2026-08-13T19:16:06.396Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/d9/50/f00935da0ec7cbf325f8dc4f772ae46fbc7b672dd62876e73f0a94adda57/sqlparse-0.6.0-py3-none-any.whl", hash = "sha256:b861c0288ce2fa56209a9a6412d2e066ac664b3873b89c26c9d8415e8e32996f", size = 50070, upload-time = "2026-08-13T19:16:04.062Z" },
-]
-
-[[package]]
-name = "typing-extensions"
-version = "4.16.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/f6/cc/6253133b5bb138fc3306cebfbda2c520f545d36b5be2c7255cc528bb45d6/typing_extensions-4.16.0.tar.gz", hash = "sha256:dc983d19a509c94dba722ee6abd33940f7c05a89e243c47e907eb4db6f1a43e5", size = 113555, upload-time = "2026-07-02T08:40:05.92Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/49/d3/b8441a820a491ddfc024b0b0cf0393375b75ea13866d9c66727e54c2fc80/typing_extensions-4.16.0-py3-none-any.whl", hash = "sha256:481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8", size = 45571, upload-time = "2026-07-02T08:40:04.659Z" },
 ]
 
 [[package]]

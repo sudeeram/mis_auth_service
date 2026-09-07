@@ -3,7 +3,6 @@
 import django.contrib.auth.models
 import django.contrib.auth.validators
 import django.db.models.deletion
-import django.db.models.functions.text
 import django.utils.timezone
 import uuid
 from django.conf import settings
@@ -356,11 +355,10 @@ class Migration(migrations.Migration):
         ),
         migrations.AddConstraint(
             model_name="user",
-            constraint=models.UniqueConstraint(
-                django.db.models.functions.text.Lower("email"),
-                condition=models.Q(("account_type", "LOCAL")),
-                name="unique_local_email_case_insensitive",
-            ),
+                constraint=models.UniqueConstraint(
+                    fields=("account_type", "email"),
+                    name="unique_account_type_email",
+                ),
         ),
         migrations.AddConstraint(
             model_name="entraidentity",
