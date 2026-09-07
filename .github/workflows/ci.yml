@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [develop, main]
+  push:
+    branches: [develop, main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.4
+        env:
+          MYSQL_ROOT_PASSWORD: root-ci-password
+          MYSQL_DATABASE: mis_auth
+          MYSQL_USER: mis_auth
+          MYSQL_PASSWORD: auth-ci-password
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -proot-ci-password"
+          --health-interval=10s --health-timeout=5s --health-retries=10
+    env:
+      MYSQL_HOST: 127.0.0.1
+      MYSQL_PORT: 3306
+      MYSQL_DATABASE: mis_auth
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root-ci-password
+      JWT_PRIVATE_KEY_FILE: /tmp/jwt-private.pem
+      JWT_PUBLIC_KEY_FILE: /tmp/jwt-public.pem
+      SAML_ENABLED: "false"
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version-file: .python-version
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - run: |
+          sudo apt-get update
+          sudo apt-get install -y default-libmysqlclient-dev pkg-config xmlsec1
+      - run: uv sync --frozen
+      - name: Generate ephemeral JWT keys
+        run: |
+          openssl genpkey -algorithm RSA -out /tmp/jwt-private.pem -pkeyopt rsa_keygen_bits:2048
+          openssl rsa -pubout -in /tmp/jwt-private.pem -out /tmp/jwt-public.pem
+      - run: uv run python manage.py migrate --noinput
+      - run: uv run python manage.py check
+      - run: uv run python manage.py test
+
+  container:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - run: docker build --tag auth-service:test .

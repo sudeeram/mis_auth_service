@@ -59,12 +59,13 @@ TEMPLATES = [{
 }]
 
 DATABASES = {"default": {
-    "ENGINE": "django.db.backends.postgresql",
-    "NAME": env("POSTGRES_DB", "auth"),
-    "USER": env("POSTGRES_USER", "auth"),
-    "PASSWORD": env("POSTGRES_PASSWORD", "auth-dev-password"),
-    "HOST": env("POSTGRES_HOST", "auth-postgres"),
-    "PORT": env("POSTGRES_PORT", "5432"),
+    "ENGINE": "django.db.backends.mysql",
+    "NAME": env("MYSQL_DATABASE", "mis_auth"),
+    "USER": env("MYSQL_USER", "mis_auth"),
+    "PASSWORD": env("MYSQL_PASSWORD", "auth-dev-password"),
+    "HOST": env("MYSQL_HOST", "auth-mysql"),
+    "PORT": env("MYSQL_PORT", "3306"),
+    "OPTIONS": {"charset": "utf8mb4", "isolation_level": "read committed"},
 }}
 if env_bool("USE_SQLITE_FOR_TESTS", False):
     DATABASES = {"default": {"ENGINE": "django.db.backends.sqlite3", "NAME": BASE_DIR / "test.sqlite3"}}
